@@ -11,6 +11,7 @@ This project demonstrates how to create autocomplete-supporting text fields usin
 
 ### React Components Demo
 - **VSCodeTextField**: React wrapper for vscode-textfield with TypeScript support
+- **VSCodeAutocompleteTextField**: Enhanced text field with dropdown autocomplete list
 - **VSCodeSingleSelect**: React wrapper for vscode-single-select with option management
 - **VSCodeMultiSelect**: React wrapper for vscode-multi-select with controlled state
 - **Interactive UI**: Live demo with state management and real-time updates
@@ -59,13 +60,15 @@ The application will be available at `http://localhost:8080`.
 
 ```
 ├── src/
-│   ├── index.ts              # Vanilla JavaScript demo
-│   ├── react-demo.tsx        # React demo application
-│   ├── components/           # React wrapper components
-│   │   ├── index.ts          # Component exports
-│   │   ├── VSCodeTextField.tsx
-│   │   ├── VSCodeSingleSelect.tsx
-│   │   └── VSCodeMultiSelect.tsx
+│   ├── index.ts                          # Vanilla JavaScript demo
+│   ├── react-demo.tsx                    # React demo application
+│   ├── example-usage.tsx                 # Simple usage example
+│   ├── components/                       # React wrapper components
+│   │   ├── index.ts                      # Component exports
+│   │   ├── VSCodeTextField.tsx           # Basic text field wrapper
+│   │   ├── VSCodeAutocompleteTextField.tsx # Enhanced autocomplete text field
+│   │   ├── VSCodeSingleSelect.tsx        # Single select wrapper
+│   │   └── VSCodeMultiSelect.tsx         # Multi select wrapper
 │   └── types/
 │       └── vscode-elements.d.ts
 ├── @types/
@@ -80,6 +83,27 @@ The application will be available at `http://localhost:8080`.
 ```
 
 ## React Components API
+
+### VSCodeAutocompleteTextField
+
+```tsx
+import { VSCodeAutocompleteTextField } from './components';
+
+const languageOptions = [
+  { value: 'JavaScript', label: 'JavaScript' },
+  { value: 'TypeScript', label: 'TypeScript' }
+];
+
+<VSCodeAutocompleteTextField
+  placeholder="Type to search..."
+  value={value}
+  options={languageOptions}
+  onInput={(value, event) => setValue(value)}
+  onSelect={(option) => console.log('Selected:', option)}
+  maxSuggestions={10}
+  minCharsToShow={1}
+/>
+```
 
 ### VSCodeTextField
 
@@ -135,6 +159,17 @@ import { VSCodeMultiSelect } from './components';
 - `style?: React.CSSProperties` - Inline styles
 - `onFocus?: (event: FocusEvent) => void` - Focus event handler
 - `onBlur?: (event: FocusEvent) => void` - Blur event handler
+
+### VSCodeAutocompleteTextField
+- `value?: string` - Current input value
+- `options?: AutocompleteOption[]` - Array of autocomplete options
+- `maxSuggestions?: number` - Maximum suggestions to show (default: 10)
+- `minCharsToShow?: number` - Minimum characters to trigger dropdown (default: 1)
+- `onInput?: (value: string, event: Event) => void` - Input event handler
+- `onSelect?: (option: AutocompleteOption) => void` - Option selection handler
+- `setSelectionRange?: (start: number, end: number) => void` - Set text selection
+- `getSelectionStart?: () => number` - Get selection start position
+- `getSelectionEnd?: () => number` - Get selection end position
 
 ### VSCodeTextField
 - `value?: string` - Current value

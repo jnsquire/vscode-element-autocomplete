@@ -1,8 +1,7 @@
 import React, { useEffect, useRef, forwardRef, useImperativeHandle } from 'react';
 
-// Import VSCode Elements
-import '@vscode-elements/elements/dist/vscode-multi-select';
-import '@vscode-elements/elements/dist/vscode-option';
+// Import VSCode React Elements
+import { VscodeMultiSelect, VscodeOption } from '@vscode-elements/react-elements';
 
 export interface OptionData {
   value: string;
@@ -38,12 +37,12 @@ export const VSCodeMultiSelect = forwardRef<VSCodeMultiSelectRef, VSCodeMultiSel
       focus: () => elementRef.current?.focus(),
       blur: () => elementRef.current?.blur(),
       getValues: () => {
-        const element = elementRef.current;
+        const element = elementRef.current?._ref;
         if (!element) return [];
         return Array.from(element.selectedOptions || []).map((option: any) => option.value);
       },
       setValues: (values: string[]) => {
-        const element = elementRef.current;
+        const element = elementRef.current?._ref;
         if (!element) return;
         
         // Clear current selections
@@ -61,39 +60,19 @@ export const VSCodeMultiSelect = forwardRef<VSCodeMultiSelectRef, VSCodeMultiSel
       }
     }));
 
-    useEffect(() => {
-      const element = elementRef.current;
+    // Handle change events
+    const handleChange = (event: any) => {
+      const element = elementRef.current?._ref;
       if (!element) return;
-
-      // Set up event listeners
-      const handleChange = (event: Event) => {
-        const selectedValues = Array.from(element.selectedOptions || []).map((option: any) => option.value);
-        onChange?.(selectedValues, event);
-      };
-
-      const handleFocus = (event: FocusEvent) => {
-        onFocus?.(event);
-      };
-
-      const handleBlur = (event: FocusEvent) => {
-        onBlur?.(event);
-      };
-
-      element.addEventListener('change', handleChange);
-      element.addEventListener('focus', handleFocus);
-      element.addEventListener('blur', handleBlur);
-
-      return () => {
-        element.removeEventListener('change', handleChange);
-        element.removeEventListener('focus', handleFocus);
-        element.removeEventListener('blur', handleBlur);
-      };
-    }, [onChange, onFocus, onBlur]);
+      
+      const selectedValues = Array.from(element.selectedOptions || []).map((option: any) => option.value);
+      onChange?.(selectedValues, event);
+    };
 
     // Update values when prop changes
     useEffect(() => {
-      if (elementRef.current && values) {
-        const element = elementRef.current;
+      if (elementRef.current?._ref && values) {
+        const element = elementRef.current._ref;
         
         // Clear current selections
         Array.from(element.children).forEach((option: any) => {
@@ -110,37 +89,45 @@ export const VSCodeMultiSelect = forwardRef<VSCodeMultiSelectRef, VSCodeMultiSel
       }
     }, [values]);
 
-    // Update disabled state
-    useEffect(() => {
-      if (elementRef.current) {
-        elementRef.current.disabled = disabled || false;
-      }
-    }, [disabled]);
+    // Event handlers for focus and blur
+    const handleFocus = (event: any) => {
+      onFocus?.(event);
+    };
 
-    // Update combobox mode
-    useEffect(() => {
-      if (elementRef.current) {
-        elementRef.current.combobox = combobox || false;
-      }
-    }, [combobox]);
+    const handleBlur = (event: any) => {
+      onBlur?.(event);
+    };
 
     return (
-      <vscode-multi-select
+      <VscodeMultiSelect
         ref={elementRef}
-        placeholder={placeholder}
+        onChange={handleChange}
+        onFocus={handleFocus}
+        onBlur={handleBlur}
         className={className}
-        style={style}
+        style={{
+          ...style,
+        }}
       >
+        {/* Use a placeholder option if provided */}
+        {placeholder && (
+          <VscodeOption value="" disabled selected={!values || values.length === 0}>
+            {placeholder}
+          </VscodeOption>
+        )}
+        
+        {/* Render the options */}
         {options.map((option) => (
-          <vscode-option
+          <VscodeOption
             key={option.value}
             value={option.value}
             disabled={option.disabled}
+            selected={values?.includes(option.value)}
           >
             {option.label}
-          </vscode-option>
+          </VscodeOption>
         ))}
-      </vscode-multi-select>
+      </VscodeMultiSelect>
     );
   }
 );

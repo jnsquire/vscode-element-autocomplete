@@ -1,0 +1,58 @@
+/* VSCode Autocomplete TextField Styles */
+
+.container {
+  position: relative;
+}
+
+.textfield {
+  width: 100%;
+}
+
+.dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background-color: var(--vscode-dropdown-background, #252526);
+  border: 1px solid var(--vscode-dropdown-border, #3c3c3c);
+  border-top: none;
+  border-radius: var(--vscode-input-border-radius, 2px);
+  max-height: 200px;
+  overflow-y: auto;
+  box-shadow: var(--vscode-widget-shadow, 0 4px 8px rgba(0, 0, 0, 0.3));
+}
+
+.option {
+  padding: 8px 12px;
+  cursor: pointer;
+  background-color: transparent;
+  color: var(--vscode-input-foreground, var(--vscode-dropdown-foreground, #cccccc));
+  font-size: var(--vscode-font-size, 13px);
+  font-family: var(--vscode-editor-font-family, var(--vscode-font-family, 'Consolas', 'Courier New', monospace));
+  font-weight: var(--vscode-editor-font-weight, normal);
+  line-height: var(--vscode-editor-line-height, 1.4);
+  border-bottom: 1px solid var(--vscode-dropdown-border, #3c3c3c);
+}
+
+.option:last-child {
+  border-bottom: none;
+}
+
+.option:hover,
+.option.selected {
+  background-color: var(--vscode-list-hoverBackground, #094771);
+  color: var(--vscode-list-hoverForeground, var(--vscode-input-foreground, #ffffff));
+}
+
+.optionLabel {
+  font-weight: var(--vscode-editor-font-weight, normal);
+  color: var(--vscode-input-foreground, var(--vscode-dropdown-foreground, #cccccc));
+}
+
+.optionValue {
+  font-size: calc(var(--vscode-font-size, 13px) * 0.85);
+  color: var(--vscode-descriptionForeground, #a0a0a0);
+  margin-top: 2px;
+  font-family: var(--vscode-editor-font-family, var(--vscode-font-family, 'Consolas', 'Courier New', monospace));
+}

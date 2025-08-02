@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, forwardRef, useImperativeHandle } from 'react';
 
-// Import VSCode Elements
-import '@vscode-elements/elements/dist/vscode-textfield';
+// Import VSCode React Elements
+import { VscodeTextfield } from '@vscode-elements/react-elements';
 
 export interface VSCodeTextFieldProps {
   placeholder?: string;
@@ -31,71 +31,46 @@ export const VSCodeTextField = forwardRef<VSCodeTextFieldRef, VSCodeTextFieldPro
       focus: () => elementRef.current?.focus(),
       blur: () => elementRef.current?.blur(),
       select: () => elementRef.current?.select(),
-      getValue: () => elementRef.current?.value || '',
+      getValue: () => elementRef.current?._ref?.value || '',
       setValue: (value: string) => {
-        if (elementRef.current) {
-          elementRef.current.value = value;
+        if (elementRef.current?._ref) {
+          elementRef.current._ref.value = value;
         }
       }
     }));
 
-    useEffect(() => {
-      const element = elementRef.current;
+    // Handle input/change events
+    const handleInput = (event: any) => {
+      const element = elementRef.current?._ref;
       if (!element) return;
+      onInput?.(element.value, event);
+    };
 
-      // Set initial value
-      if (value !== undefined) {
-        element.value = value;
-      }
+    const handleChange = (event: any) => {
+      const element = elementRef.current?._ref;
+      if (!element) return;
+      onChange?.(element.value, event);
+    };
 
-      // Set up event listeners
-      const handleInput = (event: Event) => {
-        onInput?.(element.value, event);
-      };
+    // Event handlers for focus and blur
+    const handleFocus = (event: any) => {
+      onFocus?.(event);
+    };
 
-      const handleChange = (event: Event) => {
-        onChange?.(element.value, event);
-      };
-
-      const handleFocus = (event: FocusEvent) => {
-        onFocus?.(event);
-      };
-
-      const handleBlur = (event: FocusEvent) => {
-        onBlur?.(event);
-      };
-
-      element.addEventListener('input', handleInput);
-      element.addEventListener('change', handleChange);
-      element.addEventListener('focus', handleFocus);
-      element.addEventListener('blur', handleBlur);
-
-      return () => {
-        element.removeEventListener('input', handleInput);
-        element.removeEventListener('change', handleChange);
-        element.removeEventListener('focus', handleFocus);
-        element.removeEventListener('blur', handleBlur);
-      };
-    }, [onInput, onChange, onFocus, onBlur]);
-
-    // Update value when prop changes
-    useEffect(() => {
-      if (elementRef.current && value !== undefined) {
-        elementRef.current.value = value;
-      }
-    }, [value]);
-
-    // Update disabled state
-    useEffect(() => {
-      if (elementRef.current) {
-        elementRef.current.disabled = disabled || false;
-      }
-    }, [disabled]);
+    const handleBlur = (event: any) => {
+      onBlur?.(event);
+    };
 
     return (
-      <vscode-textfield
+      <VscodeTextfield
         ref={elementRef}
+        value={value}
         placeholder={placeholder}
+        disabled={disabled}
+        onInput={handleInput}
+        onChange={handleChange}
+        onFocus={handleFocus}
+        onBlur={handleBlur}
         className={className}
         style={style}
       />

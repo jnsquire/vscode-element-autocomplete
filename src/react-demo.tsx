@@ -2,19 +2,42 @@ import React, { useState, useRef } from 'react';
 import { createRoot } from 'react-dom/client';
 import {
   VSCodeTextField,
+  VSCodeAutocompleteTextField,
   VSCodeSingleSelect,
   VSCodeMultiSelect,
   VSCodeTextFieldRef,
+  VSCodeAutocompleteTextFieldRef,
   VSCodeSingleSelectRef,
   VSCodeMultiSelectRef,
-  OptionData
+  OptionData,
+  AutocompleteOption
 } from './components';
 
 // Sample data for autocomplete suggestions
-const programmingLanguages = [
-  'JavaScript', 'TypeScript', 'Python', 'Java', 'C#', 'C++', 'Go', 'Rust',
-  'Swift', 'Kotlin', 'PHP', 'Ruby', 'Scala', 'R', 'MATLAB', 'Perl',
-  'Objective-C', 'Dart', 'Elixir', 'Haskell', 'F#', 'Clojure', 'Lua'
+const programmingLanguageOptions: AutocompleteOption[] = [
+  { value: 'JavaScript', label: 'JavaScript' },
+  { value: 'TypeScript', label: 'TypeScript' },
+  { value: 'Python', label: 'Python' },
+  { value: 'Java', label: 'Java' },
+  { value: 'C#', label: 'C#' },
+  { value: 'C++', label: 'C++' },
+  { value: 'Go', label: 'Go' },
+  { value: 'Rust', label: 'Rust' },
+  { value: 'Swift', label: 'Swift' },
+  { value: 'Kotlin', label: 'Kotlin' },
+  { value: 'PHP', label: 'PHP' },
+  { value: 'Ruby', label: 'Ruby' },
+  { value: 'Scala', label: 'Scala' },
+  { value: 'R', label: 'R' },
+  { value: 'MATLAB', label: 'MATLAB' },
+  { value: 'Perl', label: 'Perl' },
+  { value: 'Objective-C', label: 'Objective-C' },
+  { value: 'Dart', label: 'Dart' },
+  { value: 'Elixir', label: 'Elixir' },
+  { value: 'Haskell', label: 'Haskell' },
+  { value: 'F#', label: 'F#' },
+  { value: 'Clojure', label: 'Clojure' },
+  { value: 'Lua', label: 'Lua' }
 ];
 
 const frameworkOptions: OptionData[] = [
@@ -52,24 +75,23 @@ const ReactApp: React.FC = () => {
   const [textFieldValue, setTextFieldValue] = useState('');
   const [selectedFramework, setSelectedFramework] = useState('');
   const [selectedTools, setSelectedTools] = useState<string[]>([]);
-  const [filteredLanguages, setFilteredLanguages] = useState<string[]>([]);
+  const [selectedLanguage, setSelectedLanguage] = useState('');
 
   const textFieldRef = useRef<VSCodeTextFieldRef>(null);
+  const autocompleteRef = useRef<VSCodeAutocompleteTextFieldRef>(null);
   const singleSelectRef = useRef<VSCodeSingleSelectRef>(null);
   const multiSelectRef = useRef<VSCodeMultiSelectRef>(null);
 
   const handleTextFieldInput = (value: string) => {
     setTextFieldValue(value);
-    
-    // Filter programming languages for autocomplete
-    if (value.length > 0) {
-      const filtered = programmingLanguages.filter(lang =>
-        lang.toLowerCase().includes(value.toLowerCase())
-      );
-      setFilteredLanguages(filtered);
-    } else {
-      setFilteredLanguages([]);
-    }
+  };
+
+  const handleAutocompleteInput = (value: string) => {
+    setSelectedLanguage(value);
+  };
+
+  const handleLanguageSelect = (option: AutocompleteOption) => {
+    setSelectedLanguage(option.value);
   };
 
   const handleFrameworkChange = (value: string) => {
@@ -82,11 +104,12 @@ const ReactApp: React.FC = () => {
 
   const clearAll = () => {
     setTextFieldValue('');
+    setSelectedLanguage('');
     setSelectedFramework('');
     setSelectedTools([]);
-    setFilteredLanguages([]);
     
     textFieldRef.current?.setValue('');
+    autocompleteRef.current?.setValue('');
     singleSelectRef.current?.setValue('');
     multiSelectRef.current?.setValues([]);
   };
@@ -112,32 +135,53 @@ const ReactApp: React.FC = () => {
           backgroundColor: '#252526'
         }}>
           <h2 style={{ color: '#ffffff', marginBottom: '15px' }}>
-            Text Field with Autocomplete
+            Basic Text Field
           </h2>
           <p style={{ color: '#a0a0a0', marginBottom: '15px' }}>
-            Type to see programming language suggestions below.
+            A simple text field without autocomplete.
           </p>
           
           <VSCodeTextField
             ref={textFieldRef}
-            placeholder="Type a programming language..."
+            placeholder="Type anything..."
             value={textFieldValue}
             onInput={handleTextFieldInput}
             style={{ width: '100%', marginBottom: '10px' }}
           />
           
-          {filteredLanguages.length > 0 && (
-            <div style={{ 
-              fontSize: '12px',
-              color: '#a0a0a0',
-              marginTop: '5px'
-            }}>
-              <strong>Suggestions:</strong> {filteredLanguages.join(', ')}
-            </div>
-          )}
-          
           <div style={{ fontSize: '12px', color: '#a0a0a0', marginTop: '10px' }}>
             Current value: <span style={{ color: '#4FC1FF' }}>{textFieldValue || 'None'}</span>
+          </div>
+        </div>
+
+        <div style={{ 
+          marginBottom: '40px',
+          padding: '20px',
+          border: '1px solid #3c3c3c',
+          borderRadius: '8px',
+          backgroundColor: '#252526'
+        }}>
+          <h2 style={{ color: '#ffffff', marginBottom: '15px' }}>
+            Autocomplete Text Field
+          </h2>
+          <p style={{ color: '#a0a0a0', marginBottom: '15px' }}>
+            Type to see programming language suggestions in a dropdown. Use arrow keys to navigate, Enter to select, or Escape to close.
+          </p>
+          
+          <VSCodeAutocompleteTextField
+            ref={autocompleteRef}
+            placeholder="Type a programming language..."
+            value={selectedLanguage}
+            options={programmingLanguageOptions}
+            onInput={handleAutocompleteInput}
+            onSelect={handleLanguageSelect}
+            maxSuggestions={8}
+            minCharsToShow={1}
+            style={{ width: '100%', marginBottom: '10px' }}
+          />
+          
+          <div style={{ fontSize: '12px', color: '#a0a0a0', marginTop: '10px' }}>
+            Selected language: <span style={{ color: '#4FC1FF' }}>{selectedLanguage || 'None'}</span>
           </div>
         </div>
 
@@ -228,7 +272,8 @@ const ReactApp: React.FC = () => {
           
           <div style={{ marginTop: '15px', fontSize: '12px', color: '#a0a0a0' }}>
             <p><strong>Summary:</strong></p>
-            <p>Language: {textFieldValue || 'None'}</p>
+            <p>Text Field: {textFieldValue || 'None'}</p>
+            <p>Language: {selectedLanguage || 'None'}</p>
             <p>Framework: {selectedFramework || 'None'}</p>
             <p>Tools: {selectedTools.length > 0 ? selectedTools.join(', ') : 'None'}</p>
           </div>

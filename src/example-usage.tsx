@@ -1,16 +1,26 @@
 import React, { useState } from 'react';
 import {
   VSCodeTextField,
+  VSCodeAutocompleteTextField,
   VSCodeSingleSelect,
   VSCodeMultiSelect,
-  OptionData
+  OptionData,
+  AutocompleteOption
 } from './components';
 
 // Example usage of the React wrapper components
 const ExampleApp: React.FC = () => {
   const [textValue, setTextValue] = useState('');
+  const [selectedLanguage, setSelectedLanguage] = useState('');
   const [selectedFramework, setSelectedFramework] = useState('');
   const [selectedTools, setSelectedTools] = useState<string[]>([]);
+
+  const languageOptions: AutocompleteOption[] = [
+    { value: 'JavaScript', label: 'JavaScript' },
+    { value: 'TypeScript', label: 'TypeScript' },
+    { value: 'Python', label: 'Python' },
+    { value: 'Java', label: 'Java' }
+  ];
 
   const frameworkOptions: OptionData[] = [
     { value: 'react', label: 'React' },
@@ -29,9 +39,9 @@ const ExampleApp: React.FC = () => {
     <div>
       <h1>VSCode Elements React Example</h1>
       
-      {/* Text Field Example */}
+      {/* Basic Text Field Example */}
       <div>
-        <label>Enter a programming language:</label>
+        <label>Enter any text:</label>
         <VSCodeTextField
           placeholder="Type here..."
           value={textValue}
@@ -39,6 +49,20 @@ const ExampleApp: React.FC = () => {
           style={{ width: '300px', marginBottom: '10px' }}
         />
         <p>Current value: {textValue}</p>
+      </div>
+
+      {/* Autocomplete Text Field Example */}
+      <div>
+        <label>Choose a programming language:</label>
+        <VSCodeAutocompleteTextField
+          placeholder="Type to search languages..."
+          value={selectedLanguage}
+          options={languageOptions}
+          onInput={(value) => setSelectedLanguage(value)}
+          onSelect={(option) => setSelectedLanguage(option.value)}
+          style={{ width: '300px', marginBottom: '10px' }}
+        />
+        <p>Selected language: {selectedLanguage}</p>
       </div>
 
       {/* Single Select Example */}

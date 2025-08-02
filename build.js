@@ -1,4 +1,5 @@
 import { build, context } from 'esbuild';
+import cssModulesPlugin from 'esbuild-css-modules-plugin';
 
 const isProduction = process.env.NODE_ENV === 'production';
 const isWatch = process.argv.includes('--watch');
@@ -16,9 +17,9 @@ const buildOptions = {
   minify: isProduction,
   sourcemap: !isProduction,
   external: [],
-  loader: {
-    '.css': 'css'
-  }
+  plugins: [
+    cssModulesPlugin()
+  ]
 };
 
 if (isWatch) {

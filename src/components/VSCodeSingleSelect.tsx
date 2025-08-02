@@ -1,8 +1,7 @@
 import React, { useEffect, useRef, forwardRef, useImperativeHandle } from 'react';
 
-// Import VSCode Elements
-import '@vscode-elements/elements/dist/vscode-single-select';
-import '@vscode-elements/elements/dist/vscode-option';
+// Import VSCode React Elements
+import { VscodeSingleSelect, VscodeOption } from '@vscode-elements/react-elements';
 
 export interface OptionData {
   value: string;
@@ -31,91 +30,67 @@ export interface VSCodeSingleSelectRef {
 }
 
 export const VSCodeSingleSelect = forwardRef<VSCodeSingleSelectRef, VSCodeSingleSelectProps>(
-  ({ placeholder, value, disabled, combobox, options, className, style, onChange, onFocus, onBlur }, ref) => {
+  ({ placeholder, value, options, className, style, onChange, onFocus, onBlur }, ref) => {
     const elementRef = useRef<any>(null);
 
     useImperativeHandle(ref, () => ({
       focus: () => elementRef.current?.focus(),
       blur: () => elementRef.current?.blur(),
-      getValue: () => elementRef.current?.value || '',
+      getValue: () => elementRef.current?._ref?.value || '',
       setValue: (value: string) => {
-        if (elementRef.current) {
-          elementRef.current.value = value;
+        if (elementRef.current?._ref) {
+          elementRef.current._ref.value = value;
         }
       }
     }));
 
-    useEffect(() => {
-      const element = elementRef.current;
+    // Handle change events
+    const handleChange = (event: any) => {
+      const element = elementRef.current?._ref;
       if (!element) return;
+      
+      onChange?.(element.value, event);
+    };
 
-      // Set initial value
-      if (value !== undefined) {
-        element.value = value;
-      }
+    // Event handlers for focus and blur
+    const handleFocus = (event: any) => {
+      onFocus?.(event);
+    };
 
-      // Set up event listeners
-      const handleChange = (event: Event) => {
-        onChange?.(element.value, event);
-      };
-
-      const handleFocus = (event: FocusEvent) => {
-        onFocus?.(event);
-      };
-
-      const handleBlur = (event: FocusEvent) => {
-        onBlur?.(event);
-      };
-
-      element.addEventListener('change', handleChange);
-      element.addEventListener('focus', handleFocus);
-      element.addEventListener('blur', handleBlur);
-
-      return () => {
-        element.removeEventListener('change', handleChange);
-        element.removeEventListener('focus', handleFocus);
-        element.removeEventListener('blur', handleBlur);
-      };
-    }, [onChange, onFocus, onBlur]);
-
-    // Update value when prop changes
-    useEffect(() => {
-      if (elementRef.current && value !== undefined) {
-        elementRef.current.value = value;
-      }
-    }, [value]);
-
-    // Update disabled state
-    useEffect(() => {
-      if (elementRef.current) {
-        elementRef.current.disabled = disabled || false;
-      }
-    }, [disabled]);
-
-    // Update combobox mode
-    useEffect(() => {
-      if (elementRef.current) {
-        elementRef.current.combobox = combobox || false;
-      }
-    }, [combobox]);
+    const handleBlur = (event: any) => {
+      onBlur?.(event);
+    };
 
     return (
-      <vscode-single-select
+      <VscodeSingleSelect
         ref={elementRef}
-        placeholder={placeholder}
+        onChange={handleChange}
+        onFocus={handleFocus}
+        onBlur={handleBlur}
         className={className}
-        style={style}
+        style={{
+          ...style,
+        }}
       >
+        {/* Use a placeholder option if provided */}
+        {placeholder && (
+          <VscodeOption value="" disabled selected={!value}>
+            {placeholder}
+          </VscodeOption>
+        )}
+        
+        {/* Render the options */}
         {options.map((option) => (
-          <vscode-option
+          <VscodeOption
             key={option.value}
             value={option.value}
             disabled={option.disabled}
+            selected={value === option.value}
           >
             {option.label}
-          </vscode-option>
+          </VscodeOption>
         ))}
-      </vscode-single-select>
+      </VscodeSingleSelect>
     );
   }
 );
