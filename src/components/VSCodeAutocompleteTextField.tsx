@@ -213,7 +213,7 @@ export const VSCodeAutocompleteTextField = forwardRef<VSCodeAutocompleteTextFiel
     // No need for disabled effect since we pass it directly to the component
 
     return (
-      <div ref={containerRef} className="container" style={style}>
+      <div ref={containerRef} style={style} className={`container${className ? ' ' + className : ''}`}>
         <VscodeTextfield
           ref={elementRef}
           placeholder={placeholder}
@@ -224,7 +224,6 @@ export const VSCodeAutocompleteTextField = forwardRef<VSCodeAutocompleteTextFiel
           onBlur={handleBlur}
           className={className || ''}
         />
-        
         {isOpen && filteredOptions.length > 0 && (
           <div ref={dropdownRef} className='dropdown'>
             {filteredOptions.map((option, index) => (
