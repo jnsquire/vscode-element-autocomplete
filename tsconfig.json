@@ -15,7 +15,8 @@
     "jsx": "react-jsx",
     "jsxImportSource": "react",
     "lib": ["ES2020", "DOM", "DOM.Iterable"],
-    "types": ["react", "node"]
+    "types": ["react", "node"],
+    "resolveJsonModule": true
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules", "dist"]

@@ -1,86 +1,25 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import {
   VSCodeTextField,
   VSCodeAutocompleteTextField,
   VSCodeSingleSelect,
   VSCodeMultiSelect,
-  VSCodeTextFieldRef,
-  VSCodeAutocompleteTextFieldRef,
-  VSCodeSingleSelectRef,
-  VSCodeMultiSelectRef,
   OptionData,
   AutocompleteOption
 } from './components';
 
-// Sample data for autocomplete suggestions
-const programmingLanguageOptions: AutocompleteOption[] = [
-  { value: 'JavaScript', label: 'JavaScript' },
-  { value: 'TypeScript', label: 'TypeScript' },
-  { value: 'Python', label: 'Python' },
-  { value: 'Java', label: 'Java' },
-  { value: 'C#', label: 'C#' },
-  { value: 'C++', label: 'C++' },
-  { value: 'Go', label: 'Go' },
-  { value: 'Rust', label: 'Rust' },
-  { value: 'Swift', label: 'Swift' },
-  { value: 'Kotlin', label: 'Kotlin' },
-  { value: 'PHP', label: 'PHP' },
-  { value: 'Ruby', label: 'Ruby' },
-  { value: 'Scala', label: 'Scala' },
-  { value: 'R', label: 'R' },
-  { value: 'MATLAB', label: 'MATLAB' },
-  { value: 'Perl', label: 'Perl' },
-  { value: 'Objective-C', label: 'Objective-C' },
-  { value: 'Dart', label: 'Dart' },
-  { value: 'Elixir', label: 'Elixir' },
-  { value: 'Haskell', label: 'Haskell' },
-  { value: 'F#', label: 'F#' },
-  { value: 'Clojure', label: 'Clojure' },
-  { value: 'Lua', label: 'Lua' }
-];
+import data from './demo-data.json';
 
-const frameworkOptions: OptionData[] = [
-  { value: 'react', label: 'React' },
-  { value: 'vue', label: 'Vue.js' },
-  { value: 'angular', label: 'Angular' },
-  { value: 'svelte', label: 'Svelte' },
-  { value: 'express', label: 'Express.js' },
-  { value: 'nextjs', label: 'Next.js' },
-  { value: 'nuxtjs', label: 'Nuxt.js' },
-  { value: 'django', label: 'Django' },
-  { value: 'flask', label: 'Flask' },
-  { value: 'fastapi', label: 'FastAPI' },
-  { value: 'spring', label: 'Spring Boot' },
-  { value: 'aspnet', label: 'ASP.NET Core' },
-  { value: 'laravel', label: 'Laravel' },
-  { value: 'rails', label: 'Ruby on Rails' },
-  { value: 'phoenix', label: 'Phoenix' }
-];
-
-const toolOptions: OptionData[] = [
-  { value: 'vscode', label: 'VSCode' },
-  { value: 'intellij', label: 'IntelliJ IDEA' },
-  { value: 'eclipse', label: 'Eclipse' },
-  { value: 'vim', label: 'Vim' },
-  { value: 'emacs', label: 'Emacs' },
-  { value: 'sublime', label: 'Sublime Text' },
-  { value: 'webstorm', label: 'WebStorm' },
-  { value: 'visualstudio', label: 'Visual Studio' },
-  { value: 'xcode', label: 'Xcode' },
-  { value: 'androidstudio', label: 'Android Studio' }
-];
+const programmingLanguageOptions: AutocompleteOption[] = data.programmingLanguageOptions;
+const frameworkOptions: OptionData[] = data.frameworkOptions;
+const toolOptions: OptionData[] = data.toolOptions;
 
 const ReactApp: React.FC = () => {
   const [textFieldValue, setTextFieldValue] = useState('');
   const [selectedFramework, setSelectedFramework] = useState('');
   const [selectedTools, setSelectedTools] = useState<string[]>([]);
   const [selectedLanguage, setSelectedLanguage] = useState('');
-
-  const textFieldRef = useRef<VSCodeTextFieldRef>(null);
-  const autocompleteRef = useRef<VSCodeAutocompleteTextFieldRef>(null);
-  const singleSelectRef = useRef<VSCodeSingleSelectRef>(null);
-  const multiSelectRef = useRef<VSCodeMultiSelectRef>(null);
 
   const handleTextFieldInput = (value: string) => {
     setTextFieldValue(value);
@@ -107,11 +46,7 @@ const ReactApp: React.FC = () => {
     setSelectedLanguage('');
     setSelectedFramework('');
     setSelectedTools([]);
-    
-    textFieldRef.current?.setValue('');
-    autocompleteRef.current?.setValue('');
-    singleSelectRef.current?.setValue('');
-    multiSelectRef.current?.setValues([]);
+    // Removed ref method calls since refs are no longer used
   };
 
   return (
@@ -142,7 +77,6 @@ const ReactApp: React.FC = () => {
           </p>
           
           <VSCodeTextField
-            ref={textFieldRef}
             placeholder="Type anything..."
             value={textFieldValue}
             onInput={handleTextFieldInput}
@@ -169,7 +103,6 @@ const ReactApp: React.FC = () => {
           </p>
           
           <VSCodeAutocompleteTextField
-            ref={autocompleteRef}
             placeholder="Type a programming language..."
             value={selectedLanguage}
             options={programmingLanguageOptions}
@@ -200,7 +133,6 @@ const ReactApp: React.FC = () => {
           </p>
           
           <VSCodeSingleSelect
-            ref={singleSelectRef}
             placeholder="Choose or type a framework..."
             value={selectedFramework}
             combobox={true}
@@ -229,7 +161,6 @@ const ReactApp: React.FC = () => {
           </p>
           
           <VSCodeMultiSelect
-            ref={multiSelectRef}
             placeholder="Select multiple tools..."
             values={selectedTools}
             combobox={true}
