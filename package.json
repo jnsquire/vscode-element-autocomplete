@@ -1,0 +1,33 @@
+{
+  "name": "vscode-element-autocomplete",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "dist/vanilla.js",
+  "scripts": {
+    "build": "node build.js",
+    "dev": "node build.js --watch",
+    "serve": "npx http-server . -p 9000 -o",
+    "start": "npm run build && npm run serve"
+  },
+  "keywords": [
+    "vscode-elements",
+    "autocomplete",
+    "web-components"
+  ],
+  "author": "",
+  "license": "ISC",
+  "description": "Autocomplete text field demo using VSCode Elements library",
+  "devDependencies": {
+    "@types/node": "^24.1.0",
+    "esbuild": "^0.25.8",
+    "http-server": "^14.1.1",
+    "typescript": "^5.9.2"
+  },
+  "dependencies": {
+    "@types/react": "^19.1.9",
+    "@types/react-dom": "^19.1.7",
+    "@vscode-elements/elements": "^1.17.0",
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1"
+  }
+}
