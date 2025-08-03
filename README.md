@@ -24,7 +24,18 @@ This project demonstrates how to create autocomplete-supporting text fields usin
 - **Framework**: React with hooks and TypeScript integration
 - **Styling**: VSCode-themed components with dark mode support
 
+
 ## Getting Started
+
+### Importing Styles
+
+When using the components from this package, you must also import the bundled CSS for correct styling:
+
+```js
+import 'vscode-elements-autocomplete/dist/vscode-elements-autocomplete.css';
+```
+
+Import this CSS file in your main entry point (e.g., `index.js`, `index.tsx`, or similar) before rendering your app. This ensures all VSCode Elements styles are applied to the components.
 
 ### Prerequisites
 
@@ -37,6 +48,17 @@ This project demonstrates how to create autocomplete-supporting text fields usin
 # Install dependencies
 npm install
 ```
+
+
+### Demo Server
+
+To quickly preview the autocomplete text field component, you can launch a local HTTP server that serves the demo page:
+
+```bash
+npm run demo
+```
+
+This will start a server at `http://localhost:9000` and open the demo page in your browser.
 
 ### Development
 

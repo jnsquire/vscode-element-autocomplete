@@ -1,0 +1,61 @@
+/* VSCode Autocomplete TextField Styles */
+
+.autocomplete-container {
+  position: relative;
+  width: 100%;
+}
+
+.autocomplete-container .textfield {
+  width: 100%;
+}
+
+.autocomplete-container .dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background-color: var(--vscode-dropdown-background, var(--vscode-editor-background, #1e1e1e));
+  border: 1px solid var(--vscode-dropdown-border, var(--vscode-panel-border, #454545));
+  border-top: none;
+  border-radius: 0 0 var(--vscode-input-border-radius, 2px) var(--vscode-input-border-radius, 2px);
+  max-height: 200px;
+  overflow-y: auto;
+  box-shadow: var(--vscode-widget-shadow, 0 2px 8px rgba(0, 0, 0, 0.36));
+  cursor: default;
+}
+
+.autocomplete-container .option {
+  padding: 8px 12px;
+  cursor: pointer;
+  background-color: transparent;
+  color: var(--vscode-dropdown-foreground, var(--vscode-foreground, #cccccc));
+  font-size: var(--vscode-font-size, 13px);
+  font-family: var(--vscode-font-family, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif);
+  font-weight: normal;
+  line-height: 1.4;
+  border-bottom: 1px solid var(--vscode-dropdown-border, var(--vscode-panel-border, #454545));
+  transition: background-color 0.1s ease;
+}
+
+.autocomplete-container .option:last-child {
+  border-bottom: none;
+}
+
+.autocomplete-container .option:hover,
+.autocomplete-container .option.selected {
+  background-color: var(--vscode-list-hoverBackground, var(--vscode-list-focusBackground, #094771));
+  color: var(--vscode-list-hoverForeground, var(--vscode-list-focusForeground, #ffffff));
+}
+
+.autocomplete-container .optionLabel {
+  font-weight: normal;
+  color: var(--vscode-dropdown-foreground, var(--vscode-foreground, #cccccc));
+}
+
+.autocomplete-container .optionValue {
+  font-size: calc(var(--vscode-font-size, 13px) * 0.85);
+  color: var(--vscode-descriptionForeground, #a0a0a0);
+  margin-top: 2px;
+  font-family: var(--vscode-font-family, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif);
+}

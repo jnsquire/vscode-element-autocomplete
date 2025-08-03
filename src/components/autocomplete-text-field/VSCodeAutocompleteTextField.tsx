@@ -13,7 +13,6 @@ export interface VSCodeAutocompleteTextFieldProps {
   placeholder?: string;
   value?: string;
   disabled?: boolean;
-  className?: string;
   style?: React.CSSProperties;
   options?: AutocompleteOption[];
   maxSuggestions?: number;
@@ -38,11 +37,10 @@ export interface VSCodeAutocompleteTextFieldRef {
 
 export const VSCodeAutocompleteTextField = forwardRef<VSCodeAutocompleteTextFieldRef, VSCodeAutocompleteTextFieldProps>(
   ({ 
-    placeholder, 
-    value, 
-    disabled, 
-    className, 
-    style, 
+    placeholder,
+    value,
+    disabled,
+    style,
     options = [],
     maxSuggestions = 10,
     minCharsToShow = 1,
@@ -53,8 +51,6 @@ export const VSCodeAutocompleteTextField = forwardRef<VSCodeAutocompleteTextFiel
     onSelect
   }, ref) => {
     const elementRef = useRef<any>(null);
-    const dropdownRef = useRef<HTMLDivElement>(null);
-    const containerRef = useRef<HTMLDivElement>(null);
     
     const [isOpen, setIsOpen] = useState(false);
     const [filteredOptions, setFilteredOptions] = useState<AutocompleteOption[]>([]);
@@ -167,15 +163,13 @@ export const VSCodeAutocompleteTextField = forwardRef<VSCodeAutocompleteTextFiel
       return () => element.removeEventListener('keydown', handleKeyDown);
     }, [isOpen, filteredOptions, selectedIndex, selectOption]);
 
-    // Handle input event
-    const handleInput = (event: any) => {
-      const element = elementRef.current?._ref;
-      if (!element) return;
-      
-      const inputValue = element.value;
+
+    // Alternative input handler that works directly with the event
+    const handleInputEvent = useCallback((event: any) => {
+      const inputValue = event.target?.value || '';
       setCurrentValue(inputValue);
       onInput?.(inputValue, event);
-    };
+    }, [onInput]);
 
     // Handle change event
     const handleChange = (event: any) => {
@@ -213,19 +207,18 @@ export const VSCodeAutocompleteTextField = forwardRef<VSCodeAutocompleteTextFiel
     // No need for disabled effect since we pass it directly to the component
 
     return (
-      <div ref={containerRef} style={style} className={`container${className ? ' ' + className : ''}`}>
+      <div className="autocomplete-container" style={style}>
         <VscodeTextfield
           ref={elementRef}
           placeholder={placeholder}
           disabled={disabled}
-          onInput={handleInput}
+          onInput={handleInputEvent}
           onChange={handleChange}
           onFocus={handleFocus}
           onBlur={handleBlur}
-          className={className || ''}
         />
         {isOpen && filteredOptions.length > 0 && (
-          <div ref={dropdownRef} className='dropdown'>
+          <div className="dropdown">
             {filteredOptions.map((option, index) => (
               <div
                 key={option.value}
@@ -233,9 +226,9 @@ export const VSCodeAutocompleteTextField = forwardRef<VSCodeAutocompleteTextFiel
                 className={`option ${index === selectedIndex ? 'selected' : ''}`}
                 onMouseEnter={() => setSelectedIndex(index)}
               >
-                <div className='optionLabel'>{option.label}</div>
+                <div className="optionLabel">{option.label}</div>
                 {option.value !== option.label && (
-                  <div className='optionValue'>
+                  <div className="optionValue">
                     {option.value}
                   </div>
                 )}

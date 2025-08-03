@@ -4,10 +4,11 @@
   "type": "module",
   "main": "dist/vanilla.js",
   "scripts": {
-    "build": "node build.js",
+    "build": "node esbuild.config.cjs",
     "dev": "node build.js --watch",
-    "serve": "npx http-server . -p 9000 -o",
-    "start": "npm run build && npm run serve"
+    "demo": "npx http-server . -c-1 -p 9000 -o index.html",
+    "start": "npm run build && npm run serve",
+    "build:demo": "node esbuild.demo.config.cjs"
   },
   "keywords": [
     "vscode-elements",
@@ -19,6 +20,7 @@
   "description": "Autocomplete text field demo using VSCode Elements library",
   "devDependencies": {
     "@types/node": "^24.1.0",
+    "@vscode-elements/webview-playground": "^1.9.0",
     "esbuild": "^0.25.8",
     "esbuild-css-modules-plugin": "^3.1.5",
     "http-server": "^14.1.1",

@@ -2,11 +2,11 @@
 	"version": "2.0.0",
 	"tasks": [
 		{
-			"label": "Build and Serve",
+			"label": "Build",
 			"type": "shell",
 			"command": "npm",
 			"args": [
-				"start"
+				"build"
 			],
 			"group": "build",
 			"isBackground": true,

@@ -1,76 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VSCode Elements Autocomplete Demo</title>
-    <link rel="stylesheet" href="src/demo-page.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VSCode Elements Autocomplete Demo</title>
+  <!-- VSCode Elements and Playground styles/themes -->
+  <link rel="stylesheet" href="./dist/vscode-elements-autocomplete.css" />
+  <style>
+    body {
+      background: var(--vscode-editor-background, #1e1e1e);
+      color: var(--vscode-editor-foreground, #d4d4d4);
+      font-family: var(--vscode-font-family, 'Segoe UI', Arial, sans-serif);
+      margin: 0;
+      padding: 2rem;
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <h1>VSCode Elements Autocomplete Demo</h1>
-        
-        <div class="demo-toggle">
-            <button id="vanilla-btn" class="toggle-button active">Vanilla JavaScript</button>
-            <button id="react-btn" class="toggle-button">React Components</button>
-        </div>
-
-        <!-- Vanilla JavaScript Demo -->
-        <div id="vanilla-demo" class="demo-content active">
-            <div class="demo-section">
-                <h2>Basic Text Field with Autocomplete</h2>
-                <div class="demo-description">
-                    A simple text field that provides autocomplete suggestions as you type.
-                </div>
-                <div id="textfield-demo"></div>
-            </div>
-
-            <div class="demo-section">
-                <h2>Single Select with Combobox Mode</h2>
-                <div class="demo-description">
-                    A select component that allows both selection from a list and free text input with autocomplete.
-                </div>
-                <div id="single-select-demo"></div>
-            </div>
-
-            <div class="demo-section">
-                <h2>Multi Select with Autocomplete</h2>
-                <div class="demo-description">
-                    A multi-select component that supports autocomplete for adding multiple items.
-                </div>
-                <div id="multi-select-demo"></div>
-            </div>
-        </div>
-
-        <!-- React Demo -->
-        <div id="react-demo" class="demo-content">
-            <div id="react-root"></div>
-        </div>
-    </div>
-
-    <script type="module" src="dist/vanilla.js"></script>
-    <script type="module" src="dist/react.js"></script>
-    
-    <script>
-        // Toggle between demos
-        const vanillaBtn = document.getElementById('vanilla-btn');
-        const reactBtn = document.getElementById('react-btn');
-        const vanillaDemo = document.getElementById('vanilla-demo');
-        const reactDemo = document.getElementById('react-demo');
-
-        vanillaBtn.addEventListener('click', () => {
-            vanillaBtn.classList.add('active');
-            reactBtn.classList.remove('active');
-            vanillaDemo.classList.add('active');
-            reactDemo.classList.remove('active');
-        });
-
-        reactBtn.addEventListener('click', () => {
-            reactBtn.classList.add('active');
-            vanillaBtn.classList.remove('active');
-            reactDemo.classList.add('active');
-            vanillaDemo.classList.remove('active');
-        });
-    </script>
+  <div id="root"></div>
+  <vscode-dev-toolbar></vscode-dev-toolbar>
+  <script type="module" src="./dist/demo.js"></script>
 </body>
 </html>
