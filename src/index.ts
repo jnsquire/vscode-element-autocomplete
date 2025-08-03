@@ -1,2 +1,2 @@
-export { VSCodeAutocompleteTextField } from './components/VSCodeAutocompleteTextField';
-export type { VSCodeAutocompleteTextFieldProps, VSCodeAutocompleteTextFieldRef, AutocompleteOption } from './components/VSCodeAutocompleteTextField';
+export { VSCodeAutocompleteTextField } from './components/VSCodeAutocompleteTextField.js';
+export type { VSCodeAutocompleteTextFieldProps, VSCodeAutocompleteTextFieldRef, AutocompleteOption } from './components/VSCodeAutocompleteTextField.js';

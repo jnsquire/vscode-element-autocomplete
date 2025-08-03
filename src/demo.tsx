@@ -3,8 +3,7 @@ import { createRoot } from 'react-dom/client';
 
 // Import webview-playground and ensure it loads first
 import '../dist/vscode-elements-autocomplete.css';
-
-import { VSCodeAutocompleteTextField, AutocompleteOption } from '.';
+import { AutocompleteOption, VSCodeAutocompleteTextField } from './components/VSCodeAutocompleteTextField.js';
 
 const languageOptions: AutocompleteOption[] = [
   { value: 'JavaScript', label: 'JavaScript' },
