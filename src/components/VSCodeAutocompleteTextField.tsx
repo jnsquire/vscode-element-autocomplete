@@ -1,8 +1,8 @@
 import React, { useState, useRef, useEffect, forwardRef, useImperativeHandle, useCallback } from 'react';
-// Import VSCode React Elements
-import { VscodeTextfield } from '@vscode-elements/react-elements';
+import VscodeTextfield from '@vscode-elements/react-elements/dist/components/VscodeTextfield.js';
+import VscodeOption from '@vscode-elements/react-elements/dist/components/VscodeOption.js';
 
-import './VSCodeAutocompleteTextField.css';
+import '../css/VSCodeAutocompleteTextField.css';
 
 export interface AutocompleteOption {
   value: string;
@@ -220,8 +220,10 @@ export const VSCodeAutocompleteTextField = forwardRef<VSCodeAutocompleteTextFiel
         {isOpen && filteredOptions.length > 0 && (
           <div className="dropdown">
             {filteredOptions.map((option, index) => (
-              <div
+              <VscodeOption
                 key={option.value}
+                
+                value={option.value}
                 onClick={() => selectOption(option)}
                 className={`option ${index === selectedIndex ? 'selected' : ''}`}
                 onMouseEnter={() => setSelectedIndex(index)}
@@ -232,7 +234,7 @@ export const VSCodeAutocompleteTextField = forwardRef<VSCodeAutocompleteTextFiel
                     {option.value}
                   </div>
                 )}
-              </div>
+              </VscodeOption>
             ))}
           </div>
         )}
