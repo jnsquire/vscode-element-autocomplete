@@ -2,22 +2,46 @@
   "name": "vscode-element-autocomplete",
   "version": "1.0.0",
   "type": "module",
-  "main": "dist/vanilla.js",
+  "main": "dist/vscode-elements-autocomplete.js",
+  "module": "dist/vscode-elements-autocomplete.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "src"
+  ],
+  "exports": {
+    ".": {
+      "import": "./dist/vscode-elements-autocomplete.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./dist/vscode-elements-autocomplete.css": "./dist/vscode-elements-autocomplete.css"
+  },
   "scripts": {
-    "build": "node esbuild.config.cjs",
+    "build": "node esbuild.config.cjs && tsc --emitDeclarationOnly",
     "dev": "node build.js --watch",
     "demo": "npx http-server . -c-1 -p 9000 -o index.html",
     "start": "npm run build && npm run serve",
-    "build:demo": "node esbuild.demo.config.cjs"
+    "prepublishOnly": "npm run build",
+    "lint": "tsc --noEmit"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jnsquire/vscode-element-autocomplete.git"
   },
   "keywords": [
     "vscode-elements",
     "autocomplete",
-    "web-components"
+    "web-components",
+    "react",
+    "react-component"
   ],
-  "author": "",
-  "license": "ISC",
-  "description": "Autocomplete text field demo using VSCode Elements library",
+  "author": "Joel Squire <joel@squire.org>",
+  "license": "MIT",
+  "description": "React autocomplete text field component using VSCode Elements library",
+  "bugs": {
+    "url": "https://github.com/jnsquire/vscode-element-autocomplete/issues"
+  },
+  "homepage": "https://github.com/jnsquire/vscode-element-autocomplete#readme",
   "devDependencies": {
     "@types/node": "^24.1.0",
     "@vscode-elements/webview-playground": "^1.9.0",

@@ -1,103 +1,137 @@
-# VSCode Elements Autocomplete Demo
+# VSCode Elements Autocomplete
 
-This project demonstrates how to create autocomplete-supporting text fields using the [VSCode Elements](https://github.com/vscode-elements/elements) library with esbuild as the build tool. The project includes both vanilla JavaScript and React component implementations.
+[![npm version](https://img.shields.io/npm/v/vscode-element-autocomplete.svg)](https://www.npmjs.com/package/vscode-element-autocomplete)
+[![license](https://img.shields.io/npm/l/vscode-element-autocomplete.svg)](https://github.com/jnsquire/vscode-element-autocomplete/blob/main/LICENSE)
+
+A React component library providing an autocomplete text field based on the [VSCode Elements](https://github.com/vscode-elements/elements) library. The components maintain the VS Code theme and UX while providing a clean React API for easier integration.
+
+## Installation
+
+```bash
+npm install vscode-element-autocomplete
+# or
+yarn add vscode-element-autocomplete
+```
+
+## Usage
+
+```jsx
+import React, { useState } from 'react';
+import { VSCodeAutocompleteTextField } from 'vscode-element-autocomplete';
+import 'vscode-element-autocomplete/dist/vscode-elements-autocomplete.css';
+
+function App() {
+  const [selectedValue, setSelectedValue] = useState('');
+  
+  const options = [
+    { value: 'js', label: 'JavaScript' },
+    { value: 'ts', label: 'TypeScript' },
+    { value: 'py', label: 'Python' },
+    { value: 'java', label: 'Java' },
+    { value: 'go', label: 'Go' },
+    { value: 'rust', label: 'Rust' },
+  ];
+  
+  return (
+    <div>
+      <h2>Language Selection</h2>
+      <VSCodeAutocompleteTextField
+        label="Programming Language"
+        options={options}
+        value={selectedValue}
+        onChange={(value) => setSelectedValue(value)}
+        onSelect={(option) => console.log('Selected:', option)}
+        maxSuggestions={5}
+      />
+      
+      <p>Selected language: {selectedValue}</p>
+    </div>
+  );
+}
+```
+
 
 ## Features
 
-### Vanilla JavaScript Demo
-- **Basic Text Field with Autocomplete**: Simple text input with programming language suggestions
-- **Single Select with Combobox**: Dropdown selection with filtering for web frameworks
-- **Multi Select with Autocomplete**: Multiple selection component for development tools
+- **VS Code-styled autocomplete**: Provides the familiar VS Code autocomplete UX
+- **TypeScript support**: Full TypeScript definitions for all components and props
+- **Customizable filtering**: Supports various filtering modes including fuzzy search
+- **Async options**: Load options asynchronously from external sources
+- **Keyboard navigation**: Full keyboard support for accessibility
+- **Theming**: Automatically adapts to VS Code's current theme
 
-### React Components Demo
-- **VSCodeTextField**: React wrapper for vscode-textfield with TypeScript support
-- **VSCodeAutocompleteTextField**: Enhanced text field with dropdown autocomplete list
-- **VSCodeSingleSelect**: React wrapper for vscode-single-select with option management
-- **VSCodeMultiSelect**: React wrapper for vscode-multi-select with controlled state
-- **Interactive UI**: Live demo with state management and real-time updates
+## API
 
-## Tech Stack
+### VSCodeAutocompleteTextField
 
-- **Build Tool**: esbuild for fast TypeScript compilation and bundling
-- **UI Components**: @vscode-elements/elements web components library
-- **Language**: TypeScript with strict mode enabled
-- **Framework**: React with hooks and TypeScript integration
-- **Styling**: VSCode-themed components with dark mode support
+A text input field with autocomplete capabilities.
+
+#### Props
+
+| Prop | Type | Description |
+|------|------|-------------|
+| `options` | `AutocompleteOption[] \| ((inputValue: string) => AutocompleteOption[] \| Promise<AutocompleteOption[]>)` | Array of options or function returning options/promise of options |
+| `placeholder` | `string` | Placeholder text when field is empty |
+| `value` | `string` | Controlled value for the input |
+| `disabled` | `boolean` | Whether the field is disabled |
+| `maxSuggestions` | `number` | Maximum number of suggestions to show (default: 10) |
+| `minCharsToShow` | `number` | Minimum characters to type before showing suggestions (default: 1) |
+| `filter` | `'contains' \| 'fuzzy' \| 'startsWith' \| 'startsWithPerTerm'` | Filtering strategy (default: 'contains') |
+| `label` | `string` | Label for the input field |
+| `onChange` | `(value: string, event: Event) => void` | Called when input value changes |
+| `onSelect` | `(option: AutocompleteOption) => void` | Called when an option is selected |
+| `onFocus` | `(event: FocusEvent) => void` | Called when input receives focus |
+| `onBlur` | `(event: FocusEvent) => void` | Called when input loses focus |
+
+#### Ref Methods
+
+| Method | Description |
+|--------|-------------|
+| `focus()` | Focuses the input field |
+| `blur()` | Removes focus from the input field |
+| `getValue()` | Gets the current value of the input |
+| `setValue(value: string)` | Sets the value of the input programmatically |
 
 
-## Getting Started
-
-### Importing Styles
-
-When using the components from this package, you must also import the bundled CSS for correct styling:
-
-```js
-import 'vscode-elements-autocomplete/dist/vscode-elements-autocomplete.css';
-```
-
-Import this CSS file in your main entry point (e.g., `index.js`, `index.tsx`, or similar) before rendering your app. This ensures all VSCode Elements styles are applied to the components.
-
-### Prerequisites
-
-- Node.js (version 14 or higher)
-- npm or yarn
-
-### Installation
+## Development
 
 ```bash
 # Install dependencies
 npm install
-```
 
+# Build the component library
+npm run build
 
-### Demo Server
-
-To quickly preview the autocomplete text field component, you can launch a local HTTP server that serves the demo page:
-
-```bash
+# Run the demo
 npm run demo
 ```
 
-This will start a server at `http://localhost:9000` and open the demo page in your browser.
+## Contributing
 
-### Development
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+## Publishing
+
+This package can be published to npm or GitHub Packages:
 
 ```bash
-# Build the project
-npm run build
+# Login to npm
+npm login
 
-# Start development server with watch mode
-npm run dev
+# Publish to npm
+npm publish
 
-# Serve the project locally
-npm run serve
-
-# Build and serve (one command)
-npm start
+# Publish to GitHub Packages
+# (Requires GitHub authentication setup)
 ```
 
-The application will be available at `http://localhost:8080`.
+## License
 
-## Project Structure
-
-```
-├── src/
-│   ├── index.ts                          # Vanilla JavaScript demo
-│   ├── react-demo.tsx                    # React demo application
-│   ├── example-usage.tsx                 # Simple usage example
-│   ├── components/                       # React wrapper components
-│   │   ├── index.ts                      # Component exports
-│   │   ├── VSCodeTextField.tsx           # Basic text field wrapper
-│   │   ├── VSCodeAutocompleteTextField.tsx # Enhanced autocomplete text field
-│   │   ├── VSCodeSingleSelect.tsx        # Single select wrapper
-│   │   └── VSCodeMultiSelect.tsx         # Multi select wrapper
-│   └── types/
-│       └── vscode-elements.d.ts
-├── @types/
-│   └── vscode-elements.d.ts  # Global TypeScript declarations
-├── dist/                     # Built files (generated)
-│   ├── vanilla.js           # Vanilla JavaScript bundle
-│   └── react.js             # React demo bundle
+MIT
 ├── build.js                  # esbuild configuration
 ├── index.html                # Demo HTML page with toggle
 ├── package.json              # Project configuration
