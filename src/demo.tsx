@@ -20,7 +20,6 @@ const languageOptions: AutocompleteOption[] = [
 ];
 
 export default function DemoPage() {
-  const [value, setValue] = useState('');
   const [selected, setSelected] = useState<string|null>(null);
 
   return (
@@ -30,9 +29,7 @@ export default function DemoPage() {
         <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: 500 }}>Programming Language</label>
         <VSCodeAutocompleteTextField
                 placeholder="Type to search..."
-                value={value}
                 options={languageOptions}
-                onInput={setValue}
                 onSelect={option => setSelected(option.value ?? null)}
                 style={{ width: '100%' }}
             />

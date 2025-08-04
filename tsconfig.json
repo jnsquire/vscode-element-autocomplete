@@ -14,7 +14,7 @@
     "emitDecoratorMetadata": true,
     "jsx": "react-jsx",
     "jsxImportSource": "react",
-    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "lib": ["ES2024", "DOM", "DOM.Iterable" ],
     "types": ["react", "node"]
   },
   "include": ["src/**/*"],
