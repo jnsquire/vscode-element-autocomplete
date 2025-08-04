@@ -22,7 +22,8 @@
     "demo": "npx http-server . -c-1 -p 9000 -o index.html",
     "start": "npm run build && npm run serve",
     "prepublishOnly": "npm run build",
-    "lint": "tsc --noEmit"
+    "lint": "tsc --noEmit",
+    "ci": "npm run lint && npm run build"
   },
   "repository": {
     "type": "git",
