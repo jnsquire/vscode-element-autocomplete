@@ -1,0 +1,124 @@
+/* VSCode Toggle Switch Component Styles */
+
+.vscode-toggle-switch-container {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.toggle-switch-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.toggle-switch-input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+}
+
+.toggle-switch-visual {
+  display: inline-block;
+  cursor: pointer;
+  transition: opacity 0.15s ease;
+  padding: 4px;
+  margin: -4px;
+}
+
+.toggle-switch-visual:hover:not(.disabled) {
+  opacity: 0.9;
+}
+
+.toggle-switch-visual.disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.toggle-switch-visual:focus-within {
+  outline: 1px solid var(--vscode-focusBorder, #007ACC);
+  border-radius: 2px;
+}
+
+/* SVG Styling for all sizes */
+.switch rect {
+  fill: var(--vscode-input-background, #3C3C3C);
+  stroke: var(--vscode-input-border, #3C3C3C);
+  stroke-width: 1;
+  transition: fill 0.3s ease, stroke 0.3s ease;
+}
+
+.switch circle {
+  fill: var(--vscode-input-foreground, #CCCCCC);
+  transition: cx 0.3s ease, fill 0.3s ease;
+}
+
+/* On state styles */
+.toggle-switch-visual.on .switch rect {
+  fill: var(--vscode-button-background, #0E639C);
+  stroke: var(--vscode-button-background, #0E639C);
+}
+
+.toggle-switch-visual.on .switch circle {
+  fill: var(--vscode-button-foreground, #FFFFFF);
+}
+
+/* Disabled state styles */
+.toggle-switch-visual.disabled .switch rect,
+.toggle-switch-visual.disabled .switch circle {
+  opacity: 0.4;
+}
+
+.toggle-switch-label {
+  color: var(--vscode-foreground, #CCCCCC);
+  font-family: var(--vscode-font-family, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif);
+  font-size: var(--vscode-font-size, 13px);
+  cursor: pointer;
+  user-select: none;
+  line-height: 1.4;
+}
+
+.toggle-switch-label:hover:not(.disabled) {
+  color: var(--vscode-foreground, #FFFFFF);
+}
+
+/* Focus styles for accessibility */
+.toggle-switch-input:focus + .toggle-switch-visual {
+  outline: 1px solid var(--vscode-focusBorder, #007ACC);
+  border-radius: 2px;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .switch rect {
+    fill: var(--vscode-input-background, #000000) !important;
+    stroke: var(--vscode-input-foreground, #FFFFFF) !important;
+    stroke-width: 2px !important;
+  }
+  
+  .switch circle {
+    fill: var(--vscode-input-foreground, #FFFFFF) !important;
+  }
+  
+  .toggle-switch-visual.on .switch rect {
+    fill: var(--vscode-button-background, #0000FF) !important;
+    stroke: var(--vscode-input-foreground, #FFFFFF) !important;
+    stroke-width: 2px !important;
+  }
+  
+  .toggle-switch-visual.on .switch circle {
+    fill: var(--vscode-button-foreground, #FFFFFF) !important;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .switch rect,
+  .switch circle,
+  .toggle-switch-visual {
+    transition: none !important;
+  }
+}
