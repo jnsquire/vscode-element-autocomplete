@@ -4,7 +4,6 @@ import { createRoot } from 'react-dom/client';
 // Import webview-playground and ensure it loads first
 import '../dist/vscode-elements-autocomplete.css';
 import { AutocompleteOption, VSCodeAutocompleteTextField } from './components/VSCodeAutocompleteTextField.js';
-import { VSCodeCheckbox } from './components/VSCodeCheckbox.js';
 import { VSCodeToggleSwitch } from './components/VSCodeToggleSwitch.js';
 
 const languageOptions: AutocompleteOption[] = [
@@ -49,21 +48,6 @@ export default function DemoPage() {
               <strong>Selected:</strong> {selected}
               </div>
           )}
-        </section>
-
-        {/* Checkbox Demo */}
-        <section style={{ marginBottom: '3rem' }}>
-          <h2 style={{ fontSize: '1.2rem', marginBottom: '1rem' }}>Checkbox</h2>
-          <div style={{ padding: '0.5rem' }}>
-            <VSCodeCheckbox 
-              label="Enable advanced features"
-              checked={checkboxChecked}
-              onChange={(checked) => setCheckboxChecked(checked)}
-            />
-            <div style={{ marginTop: '0.5rem', color: 'var(--vscode-editor-foreground, #d4d4d4)', fontSize: '0.9rem' }}>
-              Status: {checkboxChecked ? 'Enabled' : 'Disabled'}
-            </div>
-          </div>
         </section>
 
         {/* Toggle Switch Demo */}
