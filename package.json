@@ -35,31 +35,38 @@
   "keywords": [
     "vscode-elements",
     "autocomplete",
+    "toggle-switch",
     "web-components",
     "react",
-    "react-component"
+    "react-component",
+    "vscode",
+    "ui-components"
   ],
   "author": "Joel Squire <joel@squire.org>",
   "license": "MIT",
-  "description": "React autocomplete text field component using VSCode Elements library",
+  "description": "React component wrappers for VSCode Elements with autocomplete text field and toggle switch components",
   "bugs": {
     "url": "https://github.com/jnsquire/vscode-element-react-extras/issues"
   },
   "homepage": "https://github.com/jnsquire/vscode-element-react-extras#readme",
   "devDependencies": {
     "@types/node": "^24.1.0",
+    "@types/react": "^19.1.9",
+    "@types/react-dom": "^19.1.7",
     "@vscode-elements/webview-playground": "^1.9.0",
     "esbuild": "^0.25.8",
     "esbuild-css-modules-plugin": "^3.1.5",
     "http-server": "^14.1.1",
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1",
     "typescript": "^5.9.2"
   },
   "dependencies": {
-    "@types/react": "^19.1.9",
-    "@types/react-dom": "^19.1.7",
     "@vscode-elements/elements": "^1.17.0",
-    "@vscode-elements/react-elements": "^1.15.1",
-    "react": "^19.1.1",
-    "react-dom": "^19.1.1"
+    "@vscode-elements/react-elements": "^1.15.1"
+  },
+  "peerDependencies": {
+    "react": "^18.0.0 || ^19.0.0",
+    "react-dom": "^18.0.0 || ^19.0.0"
   }
 }
