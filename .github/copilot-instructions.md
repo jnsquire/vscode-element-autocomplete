@@ -23,9 +23,9 @@ This project provides React component wrappers for the VSCode Elements library (
 - Uses esbuild for fast bundling and TypeScript compilation (configurations in `esbuild.config.cjs`)
 - TypeScript configured for ES2020 target with DOM types and React JSX support
 - Dual module format support:
-  1. ES Modules (ESM): `dist/vscode-element-react-extras.js`
-  2. CommonJS (CJS): `dist/vscode-element-react-extras.cjs`
-- Includes CSS: `dist/vscode-element-react-extras.css`
+  1. ES Modules (ESM): `dist/vscode-elements-react-extras.js`
+  2. CommonJS (CJS): `dist/vscode-elements-react-extras.cjs`
+- Includes CSS: `dist/vscode-elements-react-extras.css`
 - Demo page: `dist/demo.js`
 - Development server with http-server for local testing
 
@@ -44,8 +44,8 @@ npm run demo
 ## Component Usage:
 When importing components from this package, always include the CSS:
 ```javascript
-import 'vscode-element-react-extras/dist/vscode-element-react-extras.css';
-import { VSCodeAutocompleteTextField } from 'vscode-element-react-extras';
+import 'vscode-elements-react-extras/dist/vscode-elements-react-extras.css';
+import { VSCodeAutocompleteTextField } from 'vscode-elements-react-extras';
 ```
 
 ## VSCode Webview Integration:

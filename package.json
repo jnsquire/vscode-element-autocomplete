@@ -1,9 +1,9 @@
 {
-  "name": "vscode-element-react-extras",
+  "name": "vscode-elements-react-extras",
   "version": "0.1.0",
   "type": "module",
-  "main": "dist/vscode-element-react-extras.cjs",
-  "module": "dist/vscode-element-react-extras.js",
+  "main": "dist/vscode-elements-react-extras.cjs",
+  "module": "dist/vscode-elements-react-extras.js",
   "types": "dist/index.d.ts",
   "files": [
     "dist",
@@ -15,10 +15,10 @@
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/vscode-element-react-extras.js",
-      "require": "./dist/vscode-element-react-extras.cjs"
+      "import": "./dist/vscode-elements-react-extras.js",
+      "require": "./dist/vscode-elements-react-extras.cjs"
     },
-    "./dist/vscode-element-react-extras.css": "./dist/vscode-element-react-extras.css"
+    "./dist/vscode-elements-react-extras.css": "./dist/vscode-elements-react-extras.css"
   },
   "scripts": {
     "build": "node esbuild.config.cjs && tsc --emitDeclarationOnly",
@@ -32,7 +32,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jnsquire/vscode-element-react-extras.git"
+    "url": "git+https://github.com/jnsquire/vscode-elements-react-extras.git"
   },
   "keywords": [
     "vscode-elements",
@@ -48,9 +48,9 @@
   "license": "MIT",
   "description": "React component wrappers for VSCode Elements with autocomplete text field and toggle switch components",
   "bugs": {
-    "url": "https://github.com/jnsquire/vscode-element-react-extras/issues"
+    "url": "https://github.com/jnsquire/vscode-elements-react-extras/issues"
   },
-  "homepage": "https://github.com/jnsquire/vscode-element-react-extras#readme",
+  "homepage": "https://github.com/jnsquire/vscode-elements-react-extras#readme",
   "devDependencies": {
     "@types/node": "^24.1.0",
     "@types/react": "^19.1.9",

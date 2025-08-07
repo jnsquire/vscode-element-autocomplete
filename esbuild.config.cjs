@@ -14,7 +14,7 @@ const cssFiles = fs.readdirSync(cssDir).filter(file => file.endsWith('.css'));
 cssFiles.forEach(file => {
   fs.copyFileSync(
     path.resolve(cssDir, file),
-    path.resolve(__dirname, 'dist', 'vscode-element-react-extras.css')
+    path.resolve(__dirname, 'dist', 'vscode-elements-react-extras.css')
   );
 });
 
@@ -23,7 +23,7 @@ const builds = [
   {
     entryPoints: [path.resolve(__dirname, 'src/index.ts')],
     bundle: true,
-    outfile: path.resolve(__dirname, 'dist/vscode-element-react-extras.js'),
+    outfile: path.resolve(__dirname, 'dist/vscode-elements-react-extras.js'),
     platform: 'browser',
     format: 'esm',
     target: ['es2020'],
@@ -39,7 +39,7 @@ const builds = [
   {
     entryPoints: [path.resolve(__dirname, 'src/index.ts')],
     bundle: true,
-    outfile: path.resolve(__dirname, 'dist/vscode-element-react-extras.cjs'),
+    outfile: path.resolve(__dirname, 'dist/vscode-elements-react-extras.cjs'),
     platform: 'browser',
     format: 'cjs',
     target: ['es2020'],

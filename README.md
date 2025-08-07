@@ -1,9 +1,9 @@
 # VSCode Element React Extras
 
-[![npm version](https://img.shields.io/npm/v/vscode-element-react-extras.svg)](https://www.npmjs.com/package/vscode-element-react-extras)
-[![license](https://img.shields.io/npm/l/vscode-element-react-extras.svg)](https://github.com/jnsquire/vscode-element-react-extras/blob/main/LICENSE)
+[![npm version](https://img.shields.io/npm/v/vscode-elements-react-extras.svg)](https://www.npmjs.com/package/vscode-elements-react-extras)
+[![license](https://img.shields.io/npm/l/vscode-elements-react-extras.svg)](https://github.com/jnsquire/vscode-elements-react-extras/blob/main/LICENSE)
 
-A React component library that extends the [VSCode Elements](https://github.com/vscode-elements/elements) with additional components like autocomplete text fields and toggle switches. The components maintain the VS Code theme and UX while providing a clean React API for easier integration.
+A React component library that extends the [VSCode Elements](https://github.com/vscode-elementss/elements) with additional components like autocomplete text fields and toggle switches. The components maintain the VS Code theme and UX while providing a clean React API for easier integration.
 
 ## Features
 
@@ -16,9 +16,9 @@ A React component library that extends the [VSCode Elements](https://github.com/
 ## Installation
 
 ```bash
-npm install vscode-element-react-extras
+npm install vscode-elements-react-extras
 # or
-yarn add vscode-element-react-extras
+yarn add vscode-elements-react-extras
 ```
 
 ## Usage
@@ -27,8 +27,8 @@ yarn add vscode-element-react-extras
 
 ```jsx
 import React, { useState } from 'react';
-import { VSCodeAutocompleteTextField } from 'vscode-element-react-extras';
-import 'vscode-element-react-extras/dist/vscode-element-react-extras.css';
+import { VSCodeAutocompleteTextField } from 'vscode-elements-react-extras';
+import 'vscode-elements-react-extras/dist/vscode-elements-react-extras.css';
 
 function AutocompleteExample() {
   const [selectedValue, setSelectedValue] = useState('');
@@ -64,8 +64,8 @@ function AutocompleteExample() {
 
 ```jsx
 import React, { useState } from 'react';
-import { VSCodeToggleSwitch } from 'vscode-element-react-extras';
-import 'vscode-element-react-extras/dist/vscode-element-react-extras.css';
+import { VSCodeToggleSwitch } from 'vscode-elements-react-extras';
+import 'vscode-elements-react-extras/dist/vscode-elements-react-extras.css';
 
 function ToggleSwitchExample() {
   const [isDarkMode, setIsDarkMode] = useState(false);
