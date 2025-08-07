@@ -14,6 +14,7 @@ export interface VSCodeAutocompleteTextFieldProps {
   value?: string;
   disabled?: boolean;
   style?: React.CSSProperties;
+  className?: string;
   options?: AutocompleteOption[] | ((inputValue: string) => AutocompleteOption[] | Promise<AutocompleteOption[]>);
   maxSuggestions?: number;
   minCharsToShow?: number;
@@ -39,6 +40,7 @@ export const VSCodeAutocompleteTextField = forwardRef<VSCodeAutocompleteTextFiel
     value,
     disabled,
     style,
+    className,
     options = [],
     maxSuggestions = 10,
     minCharsToShow = 1, 
@@ -150,7 +152,7 @@ export const VSCodeAutocompleteTextField = forwardRef<VSCodeAutocompleteTextFiel
     // No need for disabled effect since we pass it directly to the component
 
     return (
-      <div className="autocomplete-container" style={style}>
+      <div className={["autocomplete-container", className].filter(Boolean).join(' ')} style={style}>
         <VscodeSingleSelect
           ref={elementRef}
           disabled={disabled}
