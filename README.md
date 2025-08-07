@@ -1,24 +1,32 @@
-# VSCode Elements Autocomplete
+# VSCode Element React Extras
 
-[![npm version](https://img.shields.io/npm/v/vscode-element-autocomplete.svg)](https://www.npmjs.com/package/vscode-element-autocomplete)
-[![license](https://img.shields.io/npm/l/vscode-element-autocomplete.svg)](https://github.com/jnsquire/vscode-element-autocomplete/blob/main/LICENSE)
+[![npm version](https://img.shields.io/npm/v/vscode-element-react-extras.svg)](https://www.npmjs.com/package/vscode-element-react-extras)
+[![license](https://img.shields.io/npm/l/vscode-element-react-extras.svg)](https://github.com/jnsquire/vscode-element-react-extras/blob/main/LICENSE)
 
 A React component library providing an autocomplete text field based on the [VSCode Elements](https://github.com/vscode-elements/elements) library. The components maintain the VS Code theme and UX while providing a clean React API for easier integration.
+
+## Features
+
+- Autocomplete text field with keyboard navigation and filtering
+- Custom toggle switch with VS Code styling
+- Supports both ES Modules and CommonJS environments
+- Full TypeScript support with type definitions
+- VS Code theme integration
 
 ## Installation
 
 ```bash
-npm install vscode-element-autocomplete
+npm install vscode-element-react-extras
 # or
-yarn add vscode-element-autocomplete
+yarn add vscode-element-react-extras
 ```
 
 ## Usage
 
 ```jsx
 import React, { useState } from 'react';
-import { VSCodeAutocompleteTextField } from 'vscode-element-autocomplete';
-import 'vscode-element-autocomplete/dist/vscode-elements-autocomplete.css';
+import { VSCodeAutocompleteTextField } from 'vscode-element-react-extras';
+import 'vscode-element-react-extras/dist/vscode-element-react-extras.css';
 
 function App() {
   const [selectedValue, setSelectedValue] = useState('');

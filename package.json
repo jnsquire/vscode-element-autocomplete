@@ -1,9 +1,9 @@
 {
-  "name": "vscode-elements-extras",
+  "name": "vscode-element-react-extras",
   "version": "1.0.0",
   "type": "module",
-  "main": "dist/vscode-elements-autocomplete.js",
-  "module": "dist/vscode-elements-autocomplete.js",
+  "main": "dist/vscode-element-react-extras.cjs",
+  "module": "dist/vscode-element-react-extras.js",
   "types": "dist/index.d.ts",
   "files": [
     "dist",
@@ -12,15 +12,17 @@
   "sideEffects": ["*.css"],
   "exports": {
     ".": {
-      "import": "./dist/vscode-elements-autocomplete.js",
-      "types": "./dist/index.d.ts"
+      "types": "./dist/index.d.ts",
+      "import": "./dist/vscode-element-react-extras.js",
+      "require": "./dist/vscode-element-react-extras.cjs"
     },
-    "./dist/vscode-elements-autocomplete.css": "./dist/vscode-elements-autocomplete.css"
+    "./dist/vscode-element-react-extras.css": "./dist/vscode-element-react-extras.css"
   },
   "scripts": {
     "build": "node esbuild.config.cjs && tsc --emitDeclarationOnly",
+    "build:demo": "node esbuild.demo.config.cjs",
     "dev": "node build.js --watch",
-    "demo": "npx http-server . -c-1 -p 9000 -o index.html",
+    "demo": "npm run build && npm run build:demo && npx http-server . -c-1 -p 9000 -o index.html",
     "start": "npm run build && npm run serve",
     "prepublishOnly": "npm run build",
     "lint": "tsc --noEmit",
@@ -28,7 +30,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jnsquire/vscode-elements-extras.git"
+    "url": "git+https://github.com/jnsquire/vscode-element-react-extras.git"
   },
   "keywords": [
     "vscode-elements",
@@ -41,9 +43,9 @@
   "license": "MIT",
   "description": "React autocomplete text field component using VSCode Elements library",
   "bugs": {
-    "url": "https://github.com/jnsquire/vscode-elements-extras/issues"
+    "url": "https://github.com/jnsquire/vscode-element-react-extras/issues"
   },
-  "homepage": "https://github.com/jnsquire/vscode-elements-extras#readme",
+  "homepage": "https://github.com/jnsquire/vscode-element-react-extras#readme",
   "devDependencies": {
     "@types/node": "^24.1.0",
     "@vscode-elements/webview-playground": "^1.9.0",

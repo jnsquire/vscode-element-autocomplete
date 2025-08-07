@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { createRoot } from 'react-dom/client';
 
-// Import webview-playground and ensure it loads first
-import '../dist/vscode-elements-autocomplete.css';
+// Import styles and components
+import './css/VSCodeAutocompleteTextField.css';
+import './css/VSCodeToggleSwitch.css';
+import './css/DemoPage.css';
 import { AutocompleteOption, VSCodeAutocompleteTextField } from './components/VSCodeAutocompleteTextField.js';
 import { VSCodeToggleSwitch } from './components/VSCodeToggleSwitch.js';
 

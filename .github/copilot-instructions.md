@@ -1,15 +1,19 @@
 <!-- Use this file to provide workspace-specific custom instructions to Copilot. For more details, visit https://code.visualstudio.com/docs/copilot/copilot-customization#_use-a-githubcopilotinstructionsmd-file -->
 
-# VSCode Elements Autocomplete Project
+# VSCode Element React Extras Project
 
-This project demonstrates autocomplete functionality using the VSCode Elements library (@vscode-elements/elements).
+This project provides React component wrappers for the VSCode Elements library (@vscode-elements/elements) with added functionality like autocomplete and toggle switch controls.
 
 ## Key Components Used:
 - `vscode-textfield`: Basic text input with autocomplete support through `VSCodeAutocompleteTextField` React wrapper
+- Custom toggle switch component: A VSCode-themed toggle switch implemented as `VSCodeToggleSwitch` React component
 
 ## Project Structure:
 - `src/components/VSCodeAutocompleteTextField.tsx`: Main autocomplete component implementation
+- `src/components/VSCodeToggleSwitch.tsx`: Toggle switch component implementation
 - `src/css/VSCodeAutocompleteTextField.css`: Component styling with VS Code theming variables
+- `src/css/VSCodeToggleSwitch.css`: Styling for toggle switch component
+- `src/css/DemoPage.css`: Styling for the demo page layout
 - `src/demo.tsx`: Example implementation for demo purposes
 - `src/demo-entry.tsx`: Entry point that initializes React with VSCode playground components
 - `src/index.ts`: Main export file for component usage
@@ -18,9 +22,11 @@ This project demonstrates autocomplete functionality using the VSCode Elements l
 ## Build System:
 - Uses esbuild for fast bundling and TypeScript compilation (configurations in `esbuild.config.cjs`)
 - TypeScript configured for ES2020 target with DOM types and React JSX support
-- Two main build outputs:
-  1. Component library: `dist/vscode-elements-autocomplete.js` (and CSS)
-  2. Demo page: `dist/demo.js`
+- Dual module format support:
+  1. ES Modules (ESM): `dist/vscode-element-react-extras.js`
+  2. CommonJS (CJS): `dist/vscode-element-react-extras.cjs`
+- Includes CSS: `dist/vscode-element-react-extras.css`
+- Demo page: `dist/demo.js`
 - Development server with http-server for local testing
 
 ## Development Workflow:
@@ -38,8 +44,8 @@ npm run demo
 ## Component Usage:
 When importing components from this package, always include the CSS:
 ```javascript
-import 'vscode-elements-autocomplete/dist/vscode-elements-autocomplete.css';
-import { VSCodeAutocompleteTextField } from 'vscode-elements-autocomplete';
+import 'vscode-element-react-extras/dist/vscode-element-react-extras.css';
+import { VSCodeAutocompleteTextField } from 'vscode-element-react-extras';
 ```
 
 ## VSCode Webview Integration:
@@ -52,6 +58,14 @@ import { VSCodeAutocompleteTextField } from 'vscode-elements-autocomplete';
 - Keyboard navigation support (arrow keys, enter, escape)
 - Custom styling based on VS Code theme variables for consistent appearance
 - See `src/components/VSCodeAutocompleteTextField.tsx` for implementation details
+
+## Toggle Switch Implementation:
+- Custom toggle switch component with VSCode styling and behavior
+- Built using standard HTML input elements with custom styling
+- Supports size variants (small, medium, large)
+- Customizable labels and colors
+- Full keyboard accessibility support
+- See `src/components/VSCodeToggleSwitch.tsx` for implementation details
 
 ## TypeScript Conventions:
 - `AutocompleteOption` interface defines the data structure for options

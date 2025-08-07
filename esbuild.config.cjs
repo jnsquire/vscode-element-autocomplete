@@ -14,17 +14,34 @@ const cssFiles = fs.readdirSync(cssDir).filter(file => file.endsWith('.css'));
 cssFiles.forEach(file => {
   fs.copyFileSync(
     path.resolve(cssDir, file),
-    path.resolve(__dirname, 'dist', 'vscode-elements-autocomplete.css')
+    path.resolve(__dirname, 'dist', 'vscode-element-react-extras.css')
   );
 });
 
 const builds = [
+  // ESM build
   {
     entryPoints: [path.resolve(__dirname, 'src/index.ts')],
     bundle: true,
-    outfile: path.resolve(__dirname, 'dist/vscode-elements-autocomplete.js'),
+    outfile: path.resolve(__dirname, 'dist/vscode-element-react-extras.js'),
     platform: 'browser',
     format: 'esm',
+    target: ['es2020'],
+    sourcemap: true,
+    minify: true,
+    external: ['react', 'react-dom', '@vscode-elements/react-elements', '@vscode-elements/elements'],
+    loader: { '.css': 'css' },
+    logLevel: 'info',
+    jsx: 'automatic',
+    jsxImportSource: 'react',
+  },
+  // CommonJS build
+  {
+    entryPoints: [path.resolve(__dirname, 'src/index.ts')],
+    bundle: true,
+    outfile: path.resolve(__dirname, 'dist/vscode-element-react-extras.cjs'),
+    platform: 'browser',
+    format: 'cjs',
     target: ['es2020'],
     sourcemap: true,
     minify: true,
