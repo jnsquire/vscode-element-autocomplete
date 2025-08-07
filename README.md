@@ -3,7 +3,7 @@
 [![npm version](https://img.shields.io/npm/v/vscode-element-react-extras.svg)](https://www.npmjs.com/package/vscode-element-react-extras)
 [![license](https://img.shields.io/npm/l/vscode-element-react-extras.svg)](https://github.com/jnsquire/vscode-element-react-extras/blob/main/LICENSE)
 
-A React component library providing an autocomplete text field based on the [VSCode Elements](https://github.com/vscode-elements/elements) library. The components maintain the VS Code theme and UX while providing a clean React API for easier integration.
+A React component library that extends the [VSCode Elements](https://github.com/vscode-elements/elements) with additional components like autocomplete text fields and toggle switches. The components maintain the VS Code theme and UX while providing a clean React API for easier integration.
 
 ## Features
 
@@ -23,12 +23,14 @@ yarn add vscode-element-react-extras
 
 ## Usage
 
+### Autocomplete Text Field
+
 ```jsx
 import React, { useState } from 'react';
 import { VSCodeAutocompleteTextField } from 'vscode-element-react-extras';
 import 'vscode-element-react-extras/dist/vscode-element-react-extras.css';
 
-function App() {
+function AutocompleteExample() {
   const [selectedValue, setSelectedValue] = useState('');
   
   const options = [
@@ -58,15 +60,31 @@ function App() {
 }
 ```
 
+### Toggle Switch
 
-## Features
+```jsx
+import React, { useState } from 'react';
+import { VSCodeToggleSwitch } from 'vscode-element-react-extras';
+import 'vscode-element-react-extras/dist/vscode-element-react-extras.css';
 
-- **VS Code-styled autocomplete**: Provides the familiar VS Code autocomplete UX
-- **TypeScript support**: Full TypeScript definitions for all components and props
-- **Customizable filtering**: Supports various filtering modes including fuzzy search
-- **Async options**: Load options asynchronously from external sources
-- **Keyboard navigation**: Full keyboard support for accessibility
-- **Theming**: Automatically adapts to VS Code's current theme
+function ToggleSwitchExample() {
+  const [isDarkMode, setIsDarkMode] = useState(false);
+  
+  return (
+    <div>
+      <h2>Theme Selection</h2>
+      <VSCodeToggleSwitch
+        label="Dark Mode"
+        checked={isDarkMode}
+        onChange={(checked) => setIsDarkMode(checked)}
+      />
+      
+      <p>Current theme: {isDarkMode ? 'Dark' : 'Light'}</p>
+    </div>
+  );
+}
+```
+
 
 ## API
 
@@ -100,6 +118,34 @@ A text input field with autocomplete capabilities.
 | `getValue()` | Gets the current value of the input |
 | `setValue(value: string)` | Sets the value of the input programmatically |
 
+### VSCodeToggleSwitch
+
+A custom toggle switch component with VS Code styling.
+
+#### Props
+
+| Prop | Type | Description |
+|------|------|-------------|
+| `checked` | `boolean` | Whether the toggle is checked |
+| `disabled` | `boolean` | Whether the toggle is disabled |
+| `label` | `string` | Label for the toggle |
+| `value` | `string` | Value attribute for the underlying input |
+| `style` | `React.CSSProperties` | Additional CSS styles |
+| `className` | `string` | Additional CSS class names |
+| `size` | `'small' \| 'medium' \| 'large'` | Size of the toggle (default: 'medium') |
+| `onChange` | `(checked: boolean, event: React.ChangeEvent<HTMLInputElement>) => void` | Called when toggle state changes |
+| `onFocus` | `(event: React.FocusEvent<HTMLInputElement>) => void` | Called when toggle receives focus |
+| `onBlur` | `(event: React.FocusEvent<HTMLInputElement>) => void` | Called when toggle loses focus |
+
+#### Ref Methods
+
+| Method | Description |
+|--------|-------------|
+| `focus()` | Focuses the toggle |
+| `blur()` | Removes focus from the toggle |
+| `getChecked()` | Gets the current checked state |
+| `setChecked(checked: boolean)` | Sets the checked state programmatically |
+
 
 ## Development
 
@@ -109,6 +155,9 @@ npm install
 
 # Build the component library
 npm run build
+
+# Build the demo
+npm run build:demo
 
 # Run the demo
 npm run demo
@@ -124,7 +173,7 @@ npm run demo
 
 ## Publishing
 
-This package can be published to npm or GitHub Packages:
+This package can be published to npm:
 
 ```bash
 # Login to npm
@@ -132,154 +181,8 @@ npm login
 
 # Publish to npm
 npm publish
-
-# Publish to GitHub Packages
-# (Requires GitHub authentication setup)
 ```
 
 ## License
 
 MIT
-├── build.js                  # esbuild configuration
-├── index.html                # Demo HTML page with toggle
-├── package.json              # Project configuration
-└── tsconfig.json             # TypeScript configuration
-```
-
-## React Components API
-
-### VSCodeAutocompleteTextField
-
-```tsx
-import { VSCodeAutocompleteTextField } from './components';
-
-const languageOptions = [
-  { value: 'JavaScript', label: 'JavaScript' },
-  { value: 'TypeScript', label: 'TypeScript' }
-];
-
-<VSCodeAutocompleteTextField
-  placeholder="Type to search..."
-  value={value}
-  options={languageOptions}
-  onInput={(value, event) => setValue(value)}
-  onSelect={(option) => console.log('Selected:', option)}
-  maxSuggestions={10}
-  minCharsToShow={1}
-/>
-```
-
-### VSCodeTextField
-
-```tsx
-import { VSCodeTextField } from './components';
-
-<VSCodeTextField
-  placeholder="Enter text..."
-  value={value}
-  onInput={(value, event) => console.log(value)}
-  onChange={(value, event) => console.log(value)}
-/>
-```
-
-### VSCodeSingleSelect
-
-```tsx
-import { VSCodeSingleSelect } from './components';
-
-const options = [
-  { value: 'react', label: 'React' },
-  { value: 'vue', label: 'Vue.js' }
-];
-
-<VSCodeSingleSelect
-  placeholder="Choose framework..."
-  options={options}
-  combobox={true}
-  onChange={(value, event) => console.log(value)}
-/>
-```
-
-### VSCodeMultiSelect
-
-```tsx
-import { VSCodeMultiSelect } from './components';
-
-<VSCodeMultiSelect
-  placeholder="Select tools..."
-  options={toolOptions}
-  values={selectedValues}
-  combobox={true}
-  onChange={(values, event) => setSelectedValues(values)}
-/>
-```
-
-## Component Props
-
-### Common Props
-- `placeholder?: string` - Placeholder text
-- `disabled?: boolean` - Disable the component
-- `className?: string` - CSS class name
-- `style?: React.CSSProperties` - Inline styles
-- `onFocus?: (event: FocusEvent) => void` - Focus event handler
-- `onBlur?: (event: FocusEvent) => void` - Blur event handler
-
-### VSCodeAutocompleteTextField
-- `value?: string` - Current input value
-- `options?: AutocompleteOption[]` - Array of autocomplete options
-- `maxSuggestions?: number` - Maximum suggestions to show (default: 10)
-- `minCharsToShow?: number` - Minimum characters to trigger dropdown (default: 1)
-- `onInput?: (value: string, event: Event) => void` - Input event handler
-- `onSelect?: (option: AutocompleteOption) => void` - Option selection handler
-- `setSelectionRange?: (start: number, end: number) => void` - Set text selection
-- `getSelectionStart?: () => number` - Get selection start position
-- `getSelectionEnd?: () => number` - Get selection end position
-
-### VSCodeTextField
-- `value?: string` - Current value
-- `onInput?: (value: string, event: Event) => void` - Input event handler
-- `onChange?: (value: string, event: Event) => void` - Change event handler
-
-### VSCodeSingleSelect
-- `value?: string` - Selected value
-- `combobox?: boolean` - Enable combobox mode for filtering
-- `options: OptionData[]` - Array of options
-- `onChange?: (value: string, event: Event) => void` - Selection change handler
-
-### VSCodeMultiSelect
-- `values?: string[]` - Array of selected values
-- `combobox?: boolean` - Enable combobox mode for filtering
-- `options: OptionData[]` - Array of options
-- `onChange?: (values: string[], event: Event) => void` - Selection change handler
-
-## Demo Features
-
-The interactive demo includes:
-- **Toggle between vanilla JS and React**: Switch implementations with a button
-- **Real-time autocomplete**: See suggestions as you type
-- **State management**: React demo shows controlled components
-- **Clear functionality**: Reset all selections
-- **Visual feedback**: Current selections displayed in real-time
-
-## Customization
-
-Both demos include sample data for:
-- Programming languages (JavaScript, TypeScript, Python, etc.)
-- Web frameworks (React, Vue.js, Angular, etc.)
-- Development tools (VSCode, IntelliJ IDEA, etc.)
-
-You can easily modify the data arrays to use your own autocomplete suggestions.
-
-## VSCode Elements Documentation
-
-For more information about available components and their properties, visit:
-- [VSCode Elements GitHub](https://github.com/vscode-elements/elements)
-- [Component Documentation](https://vscode-elements.github.io/elements/)
-
-## Contributing
-
-This is a demo project. Feel free to fork and modify it for your own use cases.
-
-## License
-
-ISC
