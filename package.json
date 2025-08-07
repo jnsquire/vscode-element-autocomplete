@@ -9,6 +9,7 @@
     "dist",
     "src"
   ],
+  "sideEffects": ["*.css"],
   "exports": {
     ".": {
       "import": "./dist/vscode-elements-autocomplete.js",

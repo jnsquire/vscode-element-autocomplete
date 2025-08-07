@@ -29,7 +29,7 @@ const builds = [
     sourcemap: true,
     minify: true,
     external: ['react', 'react-dom', '@vscode-elements/react-elements', '@vscode-elements/elements'],
-    loader: { '.css': 'text' },
+    loader: { '.css': 'css' },
     logLevel: 'info',
     jsx: 'automatic',
     jsxImportSource: 'react',
