@@ -1,6 +1,6 @@
 {
   "name": "vscode-element-react-extras",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "type": "module",
   "main": "dist/vscode-element-react-extras.cjs",
   "module": "dist/vscode-element-react-extras.js",
@@ -9,7 +9,9 @@
     "dist",
     "src"
   ],
-  "sideEffects": ["*.css"],
+  "sideEffects": [
+    "*.css"
+  ],
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
