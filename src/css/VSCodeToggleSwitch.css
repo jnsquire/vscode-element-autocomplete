@@ -1,16 +1,37 @@
 /* VSCode Toggle Switch Component Styles */
 
 .vscode-toggle-switch-container {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
+  display: block;
+  width: 100%;
 }
 
 .toggle-switch-wrapper {
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr auto; /* label grows, switch natural size */
   align-items: center;
-  gap: 8px;
+  width: 100%;
+  padding: 4px 0;
   cursor: pointer;
+  gap: 12px;
+}
+
+/* Re-map order so label appears on the left visually */
+.toggle-switch-label {
+  grid-column: 1;
+  justify-self: start;
+  margin: 0; /* remove default label margins for tight alignment */
+}
+
+.toggle-switch-visual {
+  grid-column: 2;
+  justify-self: end; /* align switches flush right */
+}
+
+/* Allow narrower viewports to keep same layout; fallback not necessary but retained for safety */
+@media (max-width: 480px) {
+  .toggle-switch-wrapper {
+    grid-template-columns: 1fr auto;
+  }
 }
 
 .toggle-switch-input {
