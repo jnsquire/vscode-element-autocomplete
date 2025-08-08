@@ -1,4 +1,6 @@
 import { useState } from 'react';
+// Bundle the VSCode webview playground so we don't reference node_modules at runtime (which 404s on GitHub Pages)
+import '@vscode-elements/webview-playground/dist/index.js';
 import { createRoot } from 'react-dom/client';
 
 // Import styles and components
