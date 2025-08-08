@@ -28,7 +28,8 @@
     "start": "npm run build && npm run serve",
     "prepublishOnly": "npm run build",
     "lint": "tsc --noEmit",
-    "ci": "npm run lint && npm run build"
+  "ci": "npm run lint && npm run build",
+  "build:site": "npm run build && npm run build:demo && node scripts/build-site.mjs"
   },
   "repository": {
     "type": "git",

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VSCode Element React Extras Demo</title>
+  <!-- VSCode Elements and Playground styles/themes -->
+  <link rel="stylesheet" href="./dist/vscode-elements-react-extras.css" />
+  <style>
+    body {
+      background: var(--vscode-editor-background, #1e1e1e);
+      color: var(--vscode-editor-foreground, #d4d4d4);
+      font-family: var(--vscode-font-family, 'Segoe UI', Arial, sans-serif);
+      margin: 0;
+      padding: 2rem;
+    }
+  </style>
+  <script type="module" src="node_modules/@vscode-elements/webview-playground/dist/index.js"></script>
+</head>
+<body>
+  <div id="root"></div>
+  <vscode-dev-toolbar></vscode-dev-toolbar>
+  <vscode-demo id="demo">
+  </vscode-demo>
+  <script type="module" src="./dist/demo.js"></script>
+</body>
+</html>
