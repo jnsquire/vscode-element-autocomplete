@@ -5,6 +5,14 @@
 
 A React component library that extends the [VSCode Elements](https://github.com/vscode-elementss/elements) with additional components like autocomplete text fields and toggle switches. The components maintain the VS Code theme and UX while providing a clean React API for easier integration.
 
+## Live Demo
+
+Explore the components in the browser:
+
+➡️ **https://jnsquire.github.io/vscode-elements-react-extras/**
+
+_(Deployed automatically from the main branch via GitHub Pages.)_
+
 ## Features
 
 - Autocomplete text field with keyboard navigation and filtering
