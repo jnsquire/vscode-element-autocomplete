@@ -13,7 +13,7 @@ esbuild.build({
   minify: true,
   splitting: true,
   chunkNames: 'chunks/[name]-[hash]',
-  external: ['react', 'react-dom', 'react-dom/client'],
+  external: ['react', 'react-dom', 'react-dom/client', 'react/jsx-runtime', 'react/jsx-dev-runtime'],
   loader: {
     '.css': 'css',
     '.tsx': 'tsx',
