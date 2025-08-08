@@ -36,6 +36,12 @@ jobs:
       - name: Build site
         run: npm run build:site
 
+      - name: List generated site contents
+        run: |
+          echo "Listing site root:" && ls -alh site
+          echo "Listing site/dist:" && ls -alh site/dist || true
+          echo "Listing site/dist/chunks (first 20):" && ls -1 site/dist/chunks | head -20 || true
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
